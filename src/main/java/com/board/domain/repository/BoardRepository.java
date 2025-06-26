@@ -8,4 +8,5 @@ import com.board.domain.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 	Page<Board> findAllByOrderByCreatedAtDesc(final Pageable pageable);
+	Page<Board> findByIdLessThanOrderByIdDesc(final Long lastId, final Pageable pageable);
 }
