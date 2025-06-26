@@ -1,0 +1,30 @@
+package com.board.domain.swagger;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.board.domain.dto.BoardDto;
+import com.board.domain.service.strategy.LoadStrategyType;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Board API", description = "게시글 정보 관련 API")
+public interface BoardSwagger {
+	@Operation(summary = "게시글 목록 조회", description = "게시글 목록을 페이징으로 조회합니다.")
+	@ApiResponse(
+		responseCode = "200",
+		description = "조회 성공",
+		content = @Content(
+			schema = @Schema(implementation = BoardDto.Response.class))
+	)
+	Page<BoardDto.Response> getBoardsPaged(
+		final LoadStrategyType type,
+		final Optional<Long> cursorId,
+		final Pageable pageable);
+}

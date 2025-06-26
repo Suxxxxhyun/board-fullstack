@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.board.domain.dto.BoardDto;
 import com.board.domain.service.BoardService;
-import com.board.domain.service.strategy.LoadStrategy;
 import com.board.domain.service.strategy.LoadStrategyType;
+import com.board.domain.swagger.BoardSwagger;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
-public class BoardController {
+public class BoardController implements BoardSwagger {
 	private final BoardService boardService;
 
 	@GetMapping
