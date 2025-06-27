@@ -38,9 +38,6 @@ public class BoardService {
 		final Pageable pageable
 	){
 		LoadStrategy strategy = strategyMap.get(type);
-		if (strategy == null) {
-			throw new IllegalArgumentException("지원하지 않는 전략: " + type);
-		}
 		return strategy.load(pageable, cursorId);
 	}
 }

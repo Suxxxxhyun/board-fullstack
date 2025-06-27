@@ -7,6 +7,7 @@ import com.board.domain.entity.Board;
 import com.board.domain.service.strategy.LoadStrategyType;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 public class BoardDto {
 	public record Request(
@@ -17,6 +18,7 @@ public class BoardDto {
 
 	}
 
+	@Builder
 	public record Response(
 		Long id,
 		String title,
