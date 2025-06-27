@@ -1,12 +1,9 @@
 package com.board.domain.swagger;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.board.domain.dto.BoardDto;
-import com.board.domain.service.strategy.LoadStrategyType;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,8 +20,11 @@ public interface BoardSwagger {
 		content = @Content(
 			schema = @Schema(implementation = BoardDto.Response.class))
 	)
+	// Page<BoardDto.Response> getBoardsPaged(
+	// 	final LoadStrategyType type,
+	// 	final Optional<Long> cursorId,
+	// 	final Pageable pageable);
 	Page<BoardDto.Response> getBoardsPaged(
-		final LoadStrategyType type,
-		final Optional<Long> cursorId,
+		final BoardDto.Request request,
 		final Pageable pageable);
 }
