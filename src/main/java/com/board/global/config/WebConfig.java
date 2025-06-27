@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-			.allowedOrigins("*") // 허용할 출처 : 특정 도메인만 받을 수 있음
+			.allowedOriginPatterns("*") // “*“같은 와일드카드를 사용
 			.allowedMethods("*") // 허용할 HTTP method
 			.allowCredentials(true); // 쿠키 인증 요청 허용
 	}
