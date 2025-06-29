@@ -8,6 +8,7 @@ class BoardApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// 기본 컨텍스트 로딩 테스트
 	}
 
 }

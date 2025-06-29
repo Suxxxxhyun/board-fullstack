@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Box,
@@ -14,6 +15,7 @@ import StrategyToggle from './StrategyToggle';
 import Pagination from './Pagination';
 
 const BoardList: React.FC = () => {
+  const navigate = useNavigate();
   const [boards, setBoards] = useState<Board[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +41,10 @@ const BoardList: React.FC = () => {
     });
     if (node) observer.current.observe(node);
   }, [loading, hasMore, strategy]);
+
+  const handleBoardClick = (board: Board) => {
+    navigate(`/board/${board.id}`);
+  };
 
   const fetchBoards = async (page: number = 0, cursorId?: number) => {
     try {
@@ -132,11 +138,11 @@ const BoardList: React.FC = () => {
           if (strategy === LoadStrategyType.INFINITE && boards.length === index + 1) {
             return (
               <div key={board.id} ref={lastBoardElementRef}>
-                <BoardCard board={board} />
+                <BoardCard board={board} onClick={handleBoardClick} />
               </div>
             );
           } else {
-            return <BoardCard key={board.id} board={board} />;
+            return <BoardCard key={board.id} board={board} onClick={handleBoardClick} />;
           }
         })}
       </Box>

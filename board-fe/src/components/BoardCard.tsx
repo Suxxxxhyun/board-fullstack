@@ -10,9 +10,10 @@ import { Board } from '../types/board';
 
 interface BoardCardProps {
   board: Board;
+  onClick?: (board: Board) => void;
 }
 
-const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
+const BoardCard: React.FC<BoardCardProps> = ({ board, onClick }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ko-KR', {
@@ -24,16 +25,24 @@ const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
     });
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick(board);
+    }
+  };
+
   return (
     <Card 
       sx={{ 
         mb: 2, 
+        cursor: onClick ? 'pointer' : 'default',
         '&:hover': {
           boxShadow: 3,
           transform: 'translateY(-2px)',
           transition: 'all 0.3s ease-in-out',
         }
       }}
+      onClick={handleClick}
     >
       <CardContent>
         <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={1}>
