@@ -242,4 +242,3 @@ npm test
 ### 4. 개발 효율성
 - TypeScript를 통한 타입 안정성
 - Material-UI를 통한 일관된 UI/UX
-- Spring Boot의 자동 설정으로 빠른 개발
