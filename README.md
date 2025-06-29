@@ -174,12 +174,12 @@ GET /api/board/1
 ### 에러 응답
 ```json
 {
-  "timestamp": "2024-01-01T12:00:00.000+00:00",
-  "status": 404,
-  "error": "Not Found",
-  "code": "B-001",
-  "message": "게시글을 찾을 수 없습니다.",
-  "path": "/api/board/999"
+    "success": false,
+    "data": null,
+    "error": {
+        "code": "BOARD_NOT_FOUND",
+        "message": "게시글을 찾을 수 없습니다."
+    }
 }
 ```
 
@@ -243,8 +243,3 @@ npm test
 - TypeScript를 통한 타입 안정성
 - Material-UI를 통한 일관된 UI/UX
 - Spring Boot의 자동 설정으로 빠른 개발
-
-## 개발자 정보
-- **이메일**: jinhyun@pentasecurity.com
-- **Git Repository**: [Repository URL]
-- **기술 스택**: Java 21, Spring Boot 3.x, React 18, TypeScript, Docker 
