@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.board.global.common.error.exception.BusinessException;
 import com.board.global.common.response.Response;
 
 @RestControllerAdvice(annotations = { RestController.class })
@@ -24,5 +25,11 @@ public class GlobalExceptionHandler {
 
 		final ExceptionDto response = new ExceptionDto(ErrorCode.NOT_VALID_ERROR, errors.toString());
 		return ResponseEntity.badRequest().body(Response.fail(response));
+	}
+
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<Response<ExceptionDto>> handleBusinessException(final BusinessException ex) {
+		final ExceptionDto response = new ExceptionDto(ex.getErrorCode(), ex.getMessage());
+		return ResponseEntity.status(ex.getErrorCode().getHttpStatus()).body(Response.fail(response));
 	}
 }
