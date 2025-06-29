@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  # Spring Boot Backend
+  board-backend:
+    build:
+      context: ./board-be
+      dockerfile: Dockerfile
+    container_name: board-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - board-network
+    volumes:
+      - ./board-be/src/main/resources:/app/resources:ro
+
+  # React Frontend
+  board-frontend:
+    build:
+      context: ./board-fe
+      dockerfile: Dockerfile
+    container_name: board-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8080
+    depends_on:
+      - board-backend
+    networks:
+      - board-network
+    volumes:
+      - ./board-fe/src:/app/src:ro
+      - /app/node_modules
+
+volumes:
+  h2-data:
+
+networks:
+  board-network:
+    driver: bridge
