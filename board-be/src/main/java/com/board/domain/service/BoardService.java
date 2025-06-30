@@ -19,7 +19,7 @@ import com.board.domain.service.strategy.LoadStrategyType;
 import com.board.domain.service.strategy.impl.InfiniteScrollStrategy;
 import com.board.domain.service.strategy.impl.PagingStrategy;
 import com.board.global.common.error.ErrorCode;
-import com.board.global.common.error.exception.BusinessException;
+import com.board.global.common.error.exception.BoardNotFoundException;
 
 @Service
 @Transactional
@@ -51,7 +51,7 @@ public class BoardService {
 	@Transactional(readOnly = true)
 	public BoardDto.Response getBoardById(final Long id) {
 		Board board = boardRepository.findById(id)
-			.orElseThrow(() -> new BusinessException(ErrorCode.BOARD_NOT_FOUND));
+			.orElseThrow(() -> new BoardNotFoundException(ErrorCode.BOARD_NOT_FOUND));
 		return BoardDto.Response.from(board);
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.board.global.common.error.exception.BusinessException;
+import com.board.global.common.error.exception.BoardNotFoundException;
 import com.board.global.common.response.Response;
 
 @RestControllerAdvice(annotations = { RestController.class })
@@ -27,8 +27,8 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.badRequest().body(Response.fail(response));
 	}
 
-	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<Response<ExceptionDto>> handleBusinessException(final BusinessException ex) {
+	@ExceptionHandler(BoardNotFoundException.class)
+	public ResponseEntity<Response<ExceptionDto>> handleBusinessException(final BoardNotFoundException ex) {
 		final ExceptionDto response = new ExceptionDto(ex.getErrorCode(), ex.getMessage());
 		return ResponseEntity.status(ex.getErrorCode().getHttpStatus()).body(Response.fail(response));
 	}

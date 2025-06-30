@@ -23,7 +23,7 @@ import com.board.domain.service.strategy.LoadStrategyType;
 import com.board.domain.service.strategy.impl.InfiniteScrollStrategy;
 import com.board.domain.service.strategy.impl.PagingStrategy;
 import com.board.global.common.error.ErrorCode;
-import com.board.global.common.error.exception.BusinessException;
+import com.board.global.common.error.exception.BoardNotFoundException;
 
 class BoardServiceTest {
 
@@ -101,7 +101,7 @@ class BoardServiceTest {
 	}
 
 	@Test
-	@DisplayName("존재하지 않는 게시글 ID로 조회 시 BusinessException을 발생시킨다.")
+	@DisplayName("존재하지 않는 게시글 ID로 조회 시 BoardNotFoundException을 발생시킨다.")
 	void getBoardById_withNonExistingId() {
 		// given
 		Long boardId = 999L;
@@ -109,7 +109,7 @@ class BoardServiceTest {
 
 		// when & then
 		assertThatThrownBy(() -> boardService.getBoardById(boardId))
-			.isInstanceOf(BusinessException.class)
+			.isInstanceOf(BoardNotFoundException.class)
 			.hasFieldOrPropertyWithValue("errorCode", ErrorCode.BOARD_NOT_FOUND);
 	}
 }
